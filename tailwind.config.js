@@ -9,12 +9,15 @@ export default {
       colors: {
         'primary': '#24292f',
         'secondary': '#0587FF',
+        'light': '#F8F8F8',
         'dark': '#262626',
         'light-dark': '#989898',
+        'grey': "#DBDBDB",
         'gradient': 'linear-gradient(89.89deg, #0056A6 -30.01%, #0587FF 125.65%);',
         'white': '#fff',
         'black': '#000',
-        'jf-btn': 'rgba(27,31,36,0.08)',
+        'orange': '#FD8C73',
+        'grey-08': 'rgba(27,31,36,0.08)',
       },
       fontSize: {
         'base': '1rem',

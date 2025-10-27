@@ -1,5 +1,5 @@
 import React from 'react'
-import GithubLogo from "../assets/github.svg"
+import GithubLogo from "../assets/Github.svg"
 const Header: React.FC = () => {
   return (
     <header className="w-full">
@@ -15,7 +15,8 @@ const Header: React.FC = () => {
 
             <nav className="ml-4 flex items-center h-full">
               <ul className="flex items-center gap-2 text-base text-white">
-                <li className="px-2 font-semibold text-white hover:text-light-dark cursor-pointer">Profile</li>
+                <li className="px-2 text-[1rem] font-light text-white hover:text-light-dark cursor-pointer">/</li>
+                <li className="px-2 text-[1rem] font-light text-white hover:text-light-dark cursor-pointer">Profile</li>
               </ul>
             </nav>
           </div>
