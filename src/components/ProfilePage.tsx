@@ -17,7 +17,8 @@ export const ProfilePage = ({ username }: { username: string }) => {
 
   if (userQuery.isLoading) return <div className="p-6">Carregando o perfil</div>
   if (userQuery.isError) {
-    const status = (userQuery.error as any)?.response?.status
+    const error = userQuery.error as { response?: { status?: number } }
+    const status = error?.response?.status
     const isNotFound = status === 404
     const title = isNotFound ? 'Usuário não encontrado' : 'Não foi possível carregar o usuário'
     const message = isNotFound

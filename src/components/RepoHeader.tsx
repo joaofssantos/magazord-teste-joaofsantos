@@ -35,7 +35,7 @@ export const RepoHeader = ({ counts }: RepoHeaderProps) => {
               className="inline w-5 h-5 mr-1 mb-1"
             />
             Repositories
-            <span className="bg-grey-08  leading-6 rounded-full b-light w-10 h-6 b-grey t text-short">
+            <span className="bg-light leading-6 rounded-full border b-grey w-10 h-6 t text-short">
               {counts.repositories}
             </span>
           </button>
@@ -54,7 +54,7 @@ export const RepoHeader = ({ counts }: RepoHeaderProps) => {
               className="inline w-5 h-5 mr-1 mb-1"
             />
             Starred
-            <span className="bg-grey-08 leading-6 rounded-full b-light w-10 h-6 b-grey t text-short">
+                     <span className="bg-light leading-6 rounded-full border b-grey w-10 h-6  t text-short">
               {counts.starred}
             </span>
           </button>

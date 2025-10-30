@@ -1,25 +1,26 @@
 import { useRepoIssues, useUser } from "../hooks/useGithubApi";
 import ArrowIcon from "../assets/Arrow.svg";
+import { GithubRepo } from "../types/github";
 
 type Props = {
-  repo: any | null;
+  repo: GithubRepo | null;
   isOpen: boolean;
   onClose: () => void;
 };
 
 export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
+  const owner = repo?.owner?.login;
+  const name = repo?.name;
+
+  const userQuery = useUser(owner);
+  const issuesQuery = useRepoIssues(owner, name, isOpen && !!repo, { state: "open" });
+
   if (!isOpen || !repo) {
     document.body.style.overflow = "unset";
     return null;
-  } else {
-    document.body.style.overflow = "hidden";
   }
-
-  const owner = repo.owner?.login as string | undefined;
-  const name = repo.name as string | undefined;
-
-  const userQuery = useUser(owner);
-  const issuesQuery = useRepoIssues(owner, name, true, { state: "open" });
+  
+  document.body.style.overflow = "hidden";
 
   return (
     <div
@@ -103,7 +104,7 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
                   <li className="text-sm text-light-dark">Não há issues abertas.</li>
                 )}
               {Array.isArray(issuesQuery.data) &&
-                issuesQuery.data.map((issue: any) => (
+                issuesQuery.data.map((issue) => (
                   <li key={issue.id}>
                     <a
                       href={issue.html_url}

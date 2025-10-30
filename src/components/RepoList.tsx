@@ -30,7 +30,7 @@ export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: P
 
   return (
     <div className="space-y-4">
-      {filtered.map((repo: any, i: number) => (
+      {filtered.map((repo, i: number) => (
         <div
           key={repo.id || i}
           className="py-4 border-b border-light sm:border-none last:border-0"

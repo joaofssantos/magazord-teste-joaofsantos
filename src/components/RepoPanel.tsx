@@ -18,8 +18,10 @@ export const RepoPanel = ({ username }: Props) => {
   const reposQuery = useRepos(username);
   const starredQuery = useStarred(username);
 
-  const data =
-    activeTab === "starred" ? starredQuery.data ?? [] : reposQuery.data ?? [];
+  const data = useMemo(
+    () => (activeTab === "starred" ? starredQuery.data ?? [] : reposQuery.data ?? []),
+    [activeTab, starredQuery.data, reposQuery.data]
+  );
 
   const counts = useMemo(
     () => ({
@@ -40,7 +42,7 @@ export const RepoPanel = ({ username }: Props) => {
 
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filteredData = filteredData.filter((response: any) => {
+      filteredData = filteredData.filter((response) => {
         const title = (
           response.full_name ||
           `${response.owner?.login}/${response.name}` ||
@@ -52,13 +54,13 @@ export const RepoPanel = ({ username }: Props) => {
     }
 
     if (selectedLanguages.length > 0) {
-      filteredData = filteredData.filter((r: any) =>
+      filteredData = filteredData.filter((r) =>
         selectedLanguages.includes(r.language || "No Language")
       );
     }
 
     if (selectedTypes.length > 0) {
-      filteredData = filteredData.filter((r: any) => {
+      filteredData = filteredData.filter((r) => {
         if (selectedTypes.includes("Fork") && r.fork) return true;
         if (selectedTypes.includes("Archived") && r.archived) return true;
         if (selectedTypes.includes("Private") && r.private) return true;
