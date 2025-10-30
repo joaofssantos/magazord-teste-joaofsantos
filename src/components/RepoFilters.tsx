@@ -70,8 +70,8 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
   }, [selectedTypes, selectedLanguages, onFilterChange]);
 
   return (
-    <div className="mb-6 items-center flex justify-between md:flex-direction-row flex-col-reverse">
-      <div className="w-[70%] max-w-[450px] border-b border-grey-light flex items-center">
+    <div className="mb-6 flex justify-between items-baseline xl:items-center  lg:flex-row flex-col-reverse">
+      <div className="  lg:max-w-[400px] xl:max-w-[450px] max-w-[unset] w-full border-b border-light flex items-center">
         <img src={SearchIcon} alt="Search" />
         <input
           value={searchQuery}
@@ -80,7 +80,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           className="flex-1 px-3 py-2 border-none focus:border-none text-base"
         />
       </div>
-      <div className=" gap-4 flex justify-end md:mb-0 mb-4 md:flex-direction-row">
+      <div className=" gap-4 flex justify-end lg:mb-0 mb-4 lg:flex-direction-row">
         <div className="relative">
           <button
             onClick={toggleTypeFilter}
@@ -95,7 +95,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           </button>
           {showTypeFilter && (
             <div className="absolute top-full left-0 mt-2 bg-white border border-grey-light rounded-lg shadow-lg p-4 min-w-[200px] z-10">
-              <div className="text-sm font-semibold mb-2">Filter by Type</div>
+
               {availableTypes.map((type) => (
                 <label
                   key={type}
@@ -127,9 +127,6 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           </button>
           {showLanguageFilter && (
             <div className="absolute top-full left-0 mt-2 bg-white border border-grey-light rounded-lg shadow-lg p-4 min-w-[200px] z-10">
-              <div className="text-sm font-semibold mb-2">
-                Filter by Language
-              </div>
               {availableLanguages.map((language) => (
                 <label
                   key={language}

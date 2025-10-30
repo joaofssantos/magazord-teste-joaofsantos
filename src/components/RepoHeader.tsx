@@ -20,12 +20,12 @@ export const RepoHeader = ({ counts }: RepoHeaderProps) => {
   return (
     <>
       <div className="border-none mb-8">
-        <nav className="flex gap-8">
+        <nav className="flex gap-3 sm:gap-8 justify-between sm:justify-start">
           <button
             onClick={() => setActiveTab("repos")}
-            className={`px-3 py-2 gap-4 border-2 flex justify-between items-center border-transparent ${
+            className={`px-3 py-2 gap-2 sm:gap-4 border-2 flex justify-between items-center border-transparent sm:text-highlight text-base ${
               activeTab === "repos"
-                ? "border-b-orange font-semibold"
+                ? "border-b-orange font-bold"
                 : "text-light-dark"
             }`}
           >
@@ -35,16 +35,16 @@ export const RepoHeader = ({ counts }: RepoHeaderProps) => {
               className="inline w-5 h-5 mr-1 mb-1"
             />
             Repositories
-            <span className="bg-grey-08 leading-6 rounded-full b-light w-10 h-6 b-grey t text-short">
+            <span className="bg-grey-08  leading-6 rounded-full b-light w-10 h-6 b-grey t text-short">
               {counts.repositories}
             </span>
           </button>
 
           <button
             onClick={() => setActiveTab("starred")}
-            className={`px-3 py-2 gap-4 border-2 flex justify-between items-center border-transparent ${
+            className={`px-3 py-2 gap-2 sm:gap-4 border-2 flex justify-between items-center border-transparent  sm:text-highlight text-base ${
               activeTab === "starred"
-                ? "border-b-orange font-semibold"
+                ? "border-b-orange font-bold"
                 : "text-light-dark"
             }`}
           >

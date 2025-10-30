@@ -58,7 +58,7 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
                 />
               </div>
               <div className="flex flex-col ml-8 min-h-20">
-                <h2 className="lg:text-large  text-base  font-semibold mb-2">
+                <h2 className="lg:text-large  text-base  font-bold mb-2">
                   {repo.owner?.login} / {repo.name}
                 </h2>
                 <p className="lg:text-highlight text-base text-light-dark">
@@ -112,7 +112,7 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
                       className="group hover:no-underline w-full flex items-center justify-between bg-white px-4 py-3 hover:bg-white-light transition"
                     >
                       <div className="min-w-0">
-                        <div className="md:text-highlight  text-base font-semibold truncate">
+                        <div className="md:text-highlight  text-base font-bold truncate">
                           {issue.title}
                         </div>
                         <div className=" text-short  md:mt-4 mt-2 text-light-dark">

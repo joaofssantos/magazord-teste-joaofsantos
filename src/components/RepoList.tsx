@@ -33,11 +33,11 @@ export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: P
       {filtered.map((repo: any, i: number) => (
         <div
           key={repo.id || i}
-          className="py-4 border-b border-grey-08 last:border-0"
+          className="py-4 border-b border-light sm:border-none last:border-0"
           onClick={() => onItemClick && onItemClick(repo)}
           role={onItemClick ? "button" : undefined}
         >
-          <h3 className="text-base font-semibold">
+          <h3 className="text-base font-bold">
             <a
               href={repo.html_url}
               target="_blank"

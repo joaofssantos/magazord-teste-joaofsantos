@@ -18,9 +18,9 @@ export const RepoItem = ({ repo, activeTab, onClick }: Props) => {
       onKeyDown={(e) => {
         if (e.key === "Enter") onClick?.(repo);
       }}
-      className="py-4 border-b border-grey-08 last:border-0 cursor-pointer"
+      className="py-4 border-b border-light sm:border-none last:border-0 cursor-pointer"
     >
-      <h3 className="text-base font-semibold">
+      <h3 className="text-base font-bold">
         <a
           href={repo.html_url}
           target="_blank"
