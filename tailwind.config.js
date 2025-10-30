@@ -13,11 +13,15 @@ export default {
         'dark': '#262626',
         'light-dark': '#989898',
         'grey': "#DBDBDB",
-        'gradient': 'linear-gradient(89.89deg, #0056A6 -30.01%, #0587FF 125.65%)',
+        'grey-light': "#C4C4C4",
+
         'white': '#fff',
         'black': '#000',
         'orange': '#FD8C73',
         'grey-08': 'rgba(27,31,36,0.08)',
+      },
+      backgroundImage: {
+        'gradient': 'linear-gradient(89.89deg, #0056A6 -30.01%, #0587FF 125.65%)',
       },
       fontSize: {
         'base': '1rem',

@@ -33,6 +33,31 @@ export const fetchRepoDetails = async (owner: string, repo: string) => {
   return data;
 };
 
+
+
+export const listRepoIssues = async (
+  owner: string,
+  repo: string,
+  page = 1,
+  per_page = 10,
+  state: "open" | "closed" | "all" = "open"
+) => {
+  try {
+    const { data } = await api.get(`/repos/${owner}/${repo}/issues`, {
+      params: { page, per_page, state },
+      headers: { Accept: "application/vnd.github+json" },
+    });
+    return data;
+  } catch (err: any) {
+    const status = err?.response?.status;
+    // Gracefully handle repos with issues disabled (410) or not found (404)
+    if (status === 410 || status === 404) {
+      return [] as any[];
+    }
+    throw err;
+  }
+};
+
 export const searchRepos = async (query: string, page = 1, per_page = 30) => {
   const { data } = await api.get(`/search/repositories`, {
     params: { q: query, page, per_page },
