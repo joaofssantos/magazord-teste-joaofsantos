@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useRepos, useStarred } from "../hooks/useGithubApi";
 import { useGithubStore } from "../store/useGithubStore";
 import type { GithubRepo } from "../types/github";
 
 import { RepoList } from "./RepoList";
 import { RepoHeader } from "./RepoHeader";
+import { RepoFilters } from "./RepoFilters";
 
 type Props = {
   username: string;
@@ -16,10 +17,8 @@ export const RepoPanel = ({ username }: Props) => {
   const reposQuery = useRepos(username);
   const starredQuery = useStarred(username);
 
-  const data = useMemo(
-    () => (activeTab === "starred" ? starredQuery.data ?? [] : reposQuery.data ?? []),
-    [activeTab, starredQuery.data, reposQuery.data]
-  );
+  const data =
+    activeTab === "starred" ? starredQuery.data ?? [] : reposQuery.data ?? [];
 
   const counts = useMemo(
     () => ({
@@ -29,6 +28,8 @@ export const RepoPanel = ({ username }: Props) => {
     [reposQuery.data, starredQuery.data]
   );
 
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
 
 
   const filtered = useMemo(() => {
@@ -49,24 +50,49 @@ export const RepoPanel = ({ username }: Props) => {
       });
     }
 
+    if (selectedLanguages.length > 0) {
+      filteredData = filteredData.filter((r: any) =>
+        selectedLanguages.includes(r.language || "No Language")
+      );
+    }
+
+    if (selectedTypes.length > 0) {
+      filteredData = filteredData.filter((r: any) => {
+        if (selectedTypes.includes("Fork") && r.fork) return true;
+        if (selectedTypes.includes("Archived") && r.archived) return true;
+        if (selectedTypes.includes("Private") && r.private) return true;
+        if (selectedTypes.includes("Public") && !r.private) return true;
+        return false;
+      });
+    }
 
     return filteredData;
-  }, [data, searchQuery]);
+  }, [data, searchQuery, selectedLanguages, selectedTypes]);
 
+  const loading =
+    activeTab === "starred" ? starredQuery.isLoading : reposQuery.isLoading;
+  const error = activeTab === "starred" ? starredQuery.error : reposQuery.error;
 
 
   return (
     <section>
       <RepoHeader counts={counts} />
-
-
-      <RepoList
-        filtered={filtered}
-        activeTab={activeTab}
-  
+      <RepoFilters
+        data={data}
+        onFilterChange={({ selectedTypes, selectedLanguages }) => {
+          setSelectedTypes(selectedTypes);
+          setSelectedLanguages(selectedLanguages);
+        }}
       />
 
+      <RepoList
+        loading={loading}
+        error={error}
+        filtered={filtered}
+        activeTab={activeTab}
+      />
 
+   
     </section>
   );
 };
