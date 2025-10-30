@@ -16,7 +16,8 @@ type User = {
 };
 
 export const ProfileSection = ({ user }: { user?: User }) => {
-  const [showInfo, setShowInfo] = useState(true);
+  
+  const [showInfo, setShowInfo] = useState(false);
 
   const avatar =
     user?.avatar_url ||
@@ -61,8 +62,7 @@ export const ProfileSection = ({ user }: { user?: User }) => {
           />
         </button>
 
-        {showInfo && (
-          <div className="text-short mx-auto md:block sm:bg-none bg-light p-4">
+        <div className={`text-short mx-auto sm:bg-none p-4 md:block ${showInfo ? 'block bg-light' : 'hidden'}`}>
             {user?.company && (
               <span className="flex items-center gap-2 my-2 sm:my-1 text-secondary">
                 <span className="w-4 h-4 flex items-center">
@@ -114,7 +114,6 @@ export const ProfileSection = ({ user }: { user?: User }) => {
               </a>
             )}
           </div>
-        )}
       </div>
     </aside>
   );

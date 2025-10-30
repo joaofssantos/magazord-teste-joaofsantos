@@ -94,18 +94,21 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
             Type
           </button>
           {showTypeFilter && (
-            <div className="absolute top-full left-0 mt-2 bg-white border border-grey-light rounded-lg shadow-lg p-4 min-w-[200px] z-10">
-
+            <div
+              className="absolute top-full right-0 mt-2  border border-secondary rounded-lg p-4 min-w-[200px] z-10
+            bg-white
+              sm:bg-blue-light"
+            >
               {availableTypes.map((type) => (
                 <label
                   key={type}
-                  className="flex items-center gap-2 text-sm cursor-pointer"
+                  className="flex items-center gap-2 pl-2  py-2 text-base hover:bg-[#ebf2fe] cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     checked={selectedTypes.includes(type)}
                     onChange={() => handleTypeChange(type)}
-                    className="rounded"
+                    className="rounded w-5 h-5"
                   />
                   {type}
                 </label>
@@ -126,17 +129,22 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
             Language
           </button>
           {showLanguageFilter && (
-            <div className="absolute top-full left-0 mt-2 bg-white border border-grey-light rounded-lg shadow-lg p-4 min-w-[200px] z-10">
+            <div
+              className="absolute top-full right-0 mt-2 border border-secondary rounded-lg  p-4 min-w-[200px] z-10
+            bg-white
+              sm:bg-blue-light
+            "
+            >
               {availableLanguages.map((language) => (
                 <label
                   key={language}
-                  className="flex items-center gap-2 text-sm cursor-pointer"
+                  className="flex items-center gap-2 pl-2  py-2 text-base hover:bg-[#ebf2fe] cursor-pointer"
                 >
                   <input
                     type="checkbox"
                     checked={selectedLanguages.includes(language)}
                     onChange={() => handleLanguageChange(language)}
-                    className="rounded"
+                    className="rounded w-5 h-5 pl-2"
                   />
                   {language}
                 </label>
