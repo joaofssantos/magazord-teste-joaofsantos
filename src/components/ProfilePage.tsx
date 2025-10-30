@@ -1,44 +1,20 @@
-import React, { useEffect } from 'react'
-import ProfileSection from './ProfileSection'
+import { useEffect } from 'react'
+import { ProfileSection } from './ProfileSection'
+import { RepoPanel } from './RepoPanel'
 import { useUser } from '../hooks/useGithubApi'
 import { useGithubStore } from '../store/useGithubStore'
 
-const ProfilePage: React.FC<{ username: string }> = ({ username }) => {
+export const ProfilePage = ({ username }: { username: string }) => {
 
-  const { setUsername, clearUsername } = useGithubStore()
+  const { setUsername, clearUsername, reset } = useGithubStore()
   const userQuery = useUser(username)
 
   useEffect(() => {
     setUsername(username)
+    reset()
     return () => clearUsername()
-  }, [username, setUsername, clearUsername])
+  }, [username, setUsername, clearUsername, reset])
 
-  if (userQuery.isLoading) {
-    return (
-      <div className="flex items-center justify-center">
-        <div className="text-lg">Carregando perfil...</div>
-      </div>
-    )
-  }
-
-  if (userQuery.isError) {
-    return (
-      <div className="flex items-center justify-center">
-        <div className=" text-center">
-          <h2 >Usuário não encontrado</h2>
-          <p >
-            Não foi possível localizar o usuário "{username}" no GitHub.
-          </p>
-          <a 
-            href="/" 
-            
-          >
-            Voltar para home
-          </a>
-        </div>
-      </div>
-    )
-  }
 
   const user = userQuery.data
 
@@ -49,13 +25,11 @@ const ProfilePage: React.FC<{ username: string }> = ({ username }) => {
           <div className="col-span-3">
             <ProfileSection user={user} />
           </div>
-          <div className="col-span-9 bg-black">
-            <p className='text-white text-center'>section - repositories</p>
-          </div> 
+          <div className="col-span-9">
+            <RepoPanel username={username} />
+          </div>
         </div>
       </div>
     </div>
   )
 }
-
-export default ProfilePage
