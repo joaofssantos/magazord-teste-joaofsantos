@@ -4,6 +4,7 @@ import { useGithubStore } from "../store/useGithubStore";
 import type { GithubRepo } from "../types/github";
 
 import { RepoList } from "./RepoList";
+import { RepoModal } from "./RepoModal";
 import { RepoHeader } from "./RepoHeader";
 import { RepoFilters } from "./RepoFilters";
 
@@ -38,15 +39,15 @@ export const RepoPanel = ({ username }: Props) => {
     let filteredData = data;
 
     if (searchQuery.trim()) {
-      const q = searchQuery.toLowerCase();
-      filteredData = filteredData.filter((r: GithubRepo) => {
+      const query = searchQuery.toLowerCase();
+      filteredData = filteredData.filter((response: any) => {
         const title = (
-          r.full_name ||
-          `${r.owner?.login}/${r.name}` ||
+          response.full_name ||
+          `${response.owner?.login}/${response.name}` ||
           ""
         ).toLowerCase();
-        const desc = (r.description || "").toLowerCase();
-        return title.includes(q) || desc.includes(q);
+        const desc = (response.description || "").toLowerCase();
+        return title.includes(query) || desc.includes(query);
       });
     }
 
@@ -72,7 +73,8 @@ export const RepoPanel = ({ username }: Props) => {
   const loading =
     activeTab === "starred" ? starredQuery.isLoading : reposQuery.isLoading;
   const error = activeTab === "starred" ? starredQuery.error : reposQuery.error;
-
+const [selectedRepo, setSelectedRepo] = useState<GithubRepo | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <section>
@@ -90,9 +92,17 @@ export const RepoPanel = ({ username }: Props) => {
         error={error}
         filtered={filtered}
         activeTab={activeTab}
+        onItemClick={(repo) => {
+          setSelectedRepo(repo);
+          setIsModalOpen(true);
+        }}
       />
 
-   
+      <RepoModal
+        repo={selectedRepo}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };
