@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# TypeScript incremental build info
+*.tsbuildinfo
+
+# Generated config artifacts
+vite.config.js
+vite.config.d.ts
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

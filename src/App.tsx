@@ -8,30 +8,40 @@ export const App = () => {
   const username = segments[0]
 
   const [input, setInput] = useState('')
+  const [currentPath, setCurrentPath] = useState(username || '')
 
   const goTo = (name: string) => {
     const path = name.trim()
     if (!path) return
-    window.location.href = `/${encodeURIComponent(path)}`
+    const newPath = `/${encodeURIComponent(path)}`
+    window.history.pushState({}, '', newPath)
+    setCurrentPath(path)
   }
 
-  if (username) {
+  const goHome = () => {
+    window.history.pushState({}, '', '/')
+    setCurrentPath('')
+  }
+
+  const currentUsername = currentPath || username
+
+  if (currentUsername) {
     return (
       <div className="min-h-screen bg-white">
-        <Header />
-        <ProfilePage username={username} />
+        <Header onLogoClick={goHome} />
+        <ProfilePage username={currentUsername} />
       </div>
     )
   }
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-      <main className="text-center">
-        <h1 className="font-semibold mb-4">Buscar perfil do GitHub</h1>
+      <Header onLogoClick={goHome} />
+      <main className="text-center w-11/12 mx-auto">
+        <h1 className="font-bold my-8">Buscar perfil do GitHub</h1>
         <p className="mb-6 text-short text-light-dark">Digite o nome de usuário na URL ou use o campo abaixo para abrir /{`{username}`}</p>
         <div className="flex gap-2 justify-center">
-          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Insira o usuario do Github" className=" border" />
+          <input value={input} onChange={(e) => setInput(e.target.value)} placeholder="Insira o usuario do Github" className=" border w-[320px] px-3" />
           <button onClick={() => goTo(input)} className="px-4 py-2 bg-gradient text-white rounded">Buscar</button>
         </div>
       </main>
