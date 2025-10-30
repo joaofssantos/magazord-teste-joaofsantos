@@ -95,7 +95,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           </button>
           {showTypeFilter && (
             <div
-              className="absolute top-full right-0 mt-2  border border-secondary rounded-lg p-4 min-w-[200px] z-10
+              className="absolute top-full left-0 md:right-0 mt-2  border border-secondary rounded-lg p-4 min-w-[200px] z-10
             bg-white
               sm:bg-blue-light"
             >
@@ -130,7 +130,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           </button>
           {showLanguageFilter && (
             <div
-              className="absolute top-full right-0 mt-2 border border-secondary rounded-lg  p-4 min-w-[200px] z-10
+              className="absolute top-full left-0 md:right-0 mt-2 border border-secondary rounded-lg  p-4 min-w-[200px] z-10
             bg-white
               sm:bg-blue-light
             "
