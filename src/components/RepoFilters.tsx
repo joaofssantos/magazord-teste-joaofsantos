@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import ArrowIcon from "../assets/Arrow.svg";
 import SearchIcon from "../assets/Search.svg";
 import { useGithubStore } from "../store/useGithubStore";
@@ -65,13 +65,13 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
     );
   };
 
-  useMemo(() => {
+  useEffect(() => {
     onFilterChange({ selectedTypes, selectedLanguages });
   }, [selectedTypes, selectedLanguages, onFilterChange]);
 
   return (
-    <div className="mb-6 flex justify-between items-baseline xl:items-center  lg:flex-row flex-col-reverse">
-      <div className="  lg:max-w-[400px] xl:max-w-[450px] max-w-[unset] w-full border-b border-light flex items-center">
+    <div className="mb-6 md:px-4 flex justify-between items-baseline xl:items-center  lg:flex-row flex-col-reverse">
+      <div className="lg:max-w-[350px] xl:max-w-[450px] max-w-[unset] w-full border-b border-light flex items-center">
         <img src={SearchIcon} alt="Search" />
         <input
           value={searchQuery}
