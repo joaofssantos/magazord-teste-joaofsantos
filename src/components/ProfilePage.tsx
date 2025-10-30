@@ -40,10 +40,10 @@ export const ProfilePage = ({ username }: { username: string }) => {
     <div className="min-h-screen bg-white">
       <div className="max-w-[1280px] mx-auto px-4 py-6">
         <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-3">
+          <div className="md:col-span-3 col-span-4">
             <ProfileSection user={user} />
           </div>
-          <div className="col-span-9">
+          <div className="md:col-span-9 col-span-8">
             <RepoPanel username={username} />
           </div>
         </div>

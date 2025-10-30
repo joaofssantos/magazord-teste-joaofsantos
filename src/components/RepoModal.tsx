@@ -31,11 +31,11 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
 
       <div className="relative">
         <div
-          className="relative p-6 z-10 bg-light  xl:w-[1200px] md:w-[100%] md:max-w-[100%] h-[90vh] mx-auto"
+          className="relative p-6 z-10 bg-light  xl:w-[1200px] w-[100vw] md:w-[90vw] md:max-w-[100%] md:h-[90vh] h-[100vh] mx-auto"
           onClick={(e) => e.stopPropagation()}
         >
           <button
-            className="absolute border-none z-50 top-3 right-3 text-sm flex text-gray-600"
+            className="absolute border-none z-50 top-2 right-2 text-sm flex text-gray-600"
             onClick={onClose}
             aria-label="Close"
           >
@@ -50,39 +50,39 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
               rel="noopener noreferrer"
               className="flex hover:no-underline items-center gap-3 mb-5 hover:opacity-90 transition"
             >
-              <div className="bg-slate-200 rounded-full w-[128px] h-[128px]">
+              <div className="bg-slate-200 rounded-full lg:w-[128px] lg:h-[128px] :w-[96px] h-[96px]">
                 <img
                   src={userQuery.data.avatar_url}
                   alt={userQuery.data.login}
-                  className="w-[128px]  h-[128px] border-none rounded-full "
+                  className="lg:w-[128px] lg:h-[128px] :w-[96px] h-[96px] border-none rounded-full "
                 />
               </div>
               <div className="flex flex-col ml-8 min-h-20">
-                <h2 className="text-large font-semibold mb-2">
+                <h2 className="lg:text-large  text-base  font-semibold mb-2">
                   {repo.owner?.login} / {repo.name}
                 </h2>
-                <p className="text-highlight text-light-dark mb-4">
+                <p className="lg:text-highlight text-base text-light-dark">
                   {repo.description}
                 </p>
               </div>
             </a>
           )}
 
-          <div className="flex text-sm my-16 gap-16">
+          <div className="flex text-sm my-16 gap-16 ml-4">
             <div>
-              <div className="font-bold text-[36px] mb-3">
+              <div className="font-bold lg:text-[36px] md:text-[28px] text-[24px] mb-3">
                 {repo.stargazers_count ?? 0}
               </div>
               <div className="text-base text-gray-500">Stars</div>
             </div>
             <div>
-              <div className="font-bold text-[36px] mb-3">
+              <div className="font-bold lg:text-[36px] md:text-[28px] text-[24px] mb-3">
                 {repo.forks_count ?? 0}
               </div>
               <div className="text-base text-gray-500">Forks</div>
             </div>
             <div>
-              <div className="font-bold text-[36px] mb-3">
+              <div className="font-bold lg:text-[36px] md:text-[28px] text-[24px] mb-3">
                 {repo.open_issues_count ?? "—"}
               </div>
               <div className="text-base text-gray-500">Issues abertas</div>
@@ -90,17 +90,17 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
           </div>
 
           <div className="mt-5">
-            <ul className="flex flex-col gap-3 overflow-x-hidden max-h-[calc(100vh-30rem)] ">
+            <ul className="flex flex-col gap-3 overflow-x-hidden md:max-h-[calc(100vh-30rem)] max-h-[calc(100vh-28rem)] ">
               {issuesQuery.isLoading && (
-                <li className="text-sm text-light-dark">Loading issues…</li>
+                <li className="text-sm text-light-dark">Carregando issues…</li>
               )}
               {issuesQuery.error && (
-                <li className="text-sm text-red-600">Failed to load issues.</li>
+                <li className="text-sm text-red-600">Falha ao carregar issues.</li>
               )}
               {Array.isArray(issuesQuery.data) &&
                 issuesQuery.data.length === 0 &&
                 !issuesQuery.isLoading && (
-                  <li className="text-sm text-light-dark">No open issues.</li>
+                  <li className="text-sm text-light-dark">Não há issues abertas.</li>
                 )}
               {Array.isArray(issuesQuery.data) &&
                 issuesQuery.data.map((issue: any) => (
@@ -112,10 +112,10 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
                       className="group hover:no-underline w-full flex items-center justify-between bg-white px-4 py-3 hover:bg-white-light transition"
                     >
                       <div className="min-w-0">
-                        <div className="text-highlight font-semibold truncate">
+                        <div className="md:text-highlight  text-base font-semibold truncate">
                           {issue.title}
                         </div>
-                        <div className="text-short mt-4 text-light-dark">
+                        <div className=" text-short  md:mt-4 mt-2 text-light-dark">
                           {issue.user?.login}
                         </div>
                       </div>

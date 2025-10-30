@@ -70,7 +70,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
   }, [selectedTypes, selectedLanguages, onFilterChange]);
 
   return (
-    <div className="mb-6 items-center flex justify-between">
+    <div className="mb-6 items-center flex justify-between md:flex-direction-row flex-col-reverse">
       <div className="w-[70%] max-w-[450px] border-b border-grey-light flex items-center">
         <img src={SearchIcon} alt="Search" />
         <input
@@ -80,7 +80,7 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
           className="flex-1 px-3 py-2 border-none focus:border-none text-base"
         />
       </div>
-      <div className=" gap-4 flex justify-end">
+      <div className=" gap-4 flex justify-end md:mb-0 mb-4 md:flex-direction-row">
         <div className="relative">
           <button
             onClick={toggleTypeFilter}

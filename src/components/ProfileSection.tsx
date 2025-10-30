@@ -21,16 +21,16 @@ export const ProfileSection = ({ user }: { user?: User }) => {
   const bio = user?.bio || "Sem bio disponível";
 
   return (
-    <aside className="p-4 ">
+    <aside className="md:p-4 py-4 ">
       <div className="sticky top-4">
         <div className="relative group mb-4">
           <div className="relative items-center flex justify-center mx-auto">
             <img
               src={avatar}
               alt={name}
-              className="w-[150px] h-[150px] rounded-full object-cover"
+              className="md:w-[150px] w-[104px] h:-[104px] md:h-[150px] rounded-full object-cover"
             />
-            <div className="shadow-[0_0_16px_0_#4F4F5026] bottom-0 absolute mr-[50%] right-[-60px] w-[40px] h-[40px] flex justify-center items-center bg-white rounded-full">
+            <div className="shadow-[0_0_16px_0_#4F4F5026] bottom-0 absolute mr-[50%] right-[-60px] w-7 h-7 md:w-[40px] md:h-[40px] flex justify-center items-center bg-white rounded-full">
               <span role="img" aria-label="emoji">
                 😎
               </span>
@@ -45,7 +45,8 @@ export const ProfileSection = ({ user }: { user?: User }) => {
           <p className="text-short text-center text-light-dark">{bio}</p>
         </div>
 
-        <div className="text-short space-y-1">
+
+  <div className="text-short space-y-1">
           {user?.company && (
             <span className="flex items-center gap-2 text-secondary">
               <span className="w-4 h-4 flex items-center">
@@ -67,12 +68,12 @@ export const ProfileSection = ({ user }: { user?: User }) => {
               href={user.blog.startsWith('http') ? user.blog : `https://${user.blog}`}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-secondary hover:underline"
+              className="flex items-center gap-2 text-secondary hover:underline truncate w-52 text-ellipsis"
             >
               <span className="w-4 h-4 flex items-center">
                 <img src={ChainIcon} alt="Url" />
               </span>
-              {user.blog}
+              {user?.blog ? user.blog.replace(/^https?:\/\//, "") : ""}
             </a>
           )}
           {user?.html_url && (
@@ -89,6 +90,8 @@ export const ProfileSection = ({ user }: { user?: User }) => {
             </a>
           )}
         </div>
+
+      
       </div>
     </aside>
   );
