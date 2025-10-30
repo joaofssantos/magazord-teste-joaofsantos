@@ -1,0 +1,136 @@
+import { useRepoIssues, useUser } from "../hooks/useGithubApi";
+import ArrowIcon from "../assets/Arrow.svg";
+
+type Props = {
+  repo: any | null;
+  isOpen: boolean;
+  onClose: () => void;
+};
+
+export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
+  if (!isOpen || !repo) {
+    document.body.style.overflow = "unset";
+    return null;
+  } else {
+    document.body.style.overflow = "hidden";
+  }
+
+  const owner = repo.owner?.login as string | undefined;
+  const name = repo.name as string | undefined;
+
+  const userQuery = useUser(owner);
+  const issuesQuery = useRepoIssues(owner, name, true, { state: "open" });
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center"
+      role="dialog"
+      aria-modal="true"
+    >
+      <div className="absolute inset-0 bg-black/50 " onClick={onClose} />
+
+      <div className="relative">
+        <div
+          className="relative p-6 z-10 bg-light  xl:w-[1200px] md:w-[100%] md:max-w-[100%] h-[90vh] mx-auto"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            className="absolute border-none z-50 top-3 right-3 text-sm flex text-gray-600"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <img src={ArrowIcon} className="rotate-90 invert w-4" />
+            Voltar
+          </button>
+
+          {userQuery.isSuccess && userQuery.data && (
+            <a
+              href={userQuery.data.html_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex hover:no-underline items-center gap-3 mb-5 hover:opacity-90 transition"
+            >
+              <div className="bg-slate-200 rounded-full w-[128px] h-[128px]">
+                <img
+                  src={userQuery.data.avatar_url}
+                  alt={userQuery.data.login}
+                  className="w-[128px]  h-[128px] border-none rounded-full "
+                />
+              </div>
+              <div className="flex flex-col ml-8 min-h-20">
+                <h2 className="text-large font-semibold mb-2">
+                  {repo.owner?.login} / {repo.name}
+                </h2>
+                <p className="text-highlight text-light-dark mb-4">
+                  {repo.description}
+                </p>
+              </div>
+            </a>
+          )}
+
+          <div className="flex text-sm my-16 gap-16">
+            <div>
+              <div className="font-bold text-[36px] mb-3">
+                {repo.stargazers_count ?? 0}
+              </div>
+              <div className="text-base text-gray-500">Stars</div>
+            </div>
+            <div>
+              <div className="font-bold text-[36px] mb-3">
+                {repo.forks_count ?? 0}
+              </div>
+              <div className="text-base text-gray-500">Forks</div>
+            </div>
+            <div>
+              <div className="font-bold text-[36px] mb-3">
+                {repo.open_issues_count ?? "—"}
+              </div>
+              <div className="text-base text-gray-500">Issues abertas</div>
+            </div>
+          </div>
+
+          <div className="mt-5">
+            <ul className="flex flex-col gap-3 overflow-x-hidden max-h-[calc(100vh-30rem)] ">
+              {issuesQuery.isLoading && (
+                <li className="text-sm text-light-dark">Loading issues…</li>
+              )}
+              {issuesQuery.error && (
+                <li className="text-sm text-red-600">Failed to load issues.</li>
+              )}
+              {Array.isArray(issuesQuery.data) &&
+                issuesQuery.data.length === 0 &&
+                !issuesQuery.isLoading && (
+                  <li className="text-sm text-light-dark">No open issues.</li>
+                )}
+              {Array.isArray(issuesQuery.data) &&
+                issuesQuery.data.map((issue: any) => (
+                  <li key={issue.id}>
+                    <a
+                      href={issue.html_url}
+                      target="_blank"
+                      rel="noreferrer noopener"
+                      className="group hover:no-underline w-full flex items-center justify-between bg-white px-4 py-3 hover:bg-white-light transition"
+                    >
+                      <div className="min-w-0">
+                        <div className="text-highlight font-semibold truncate">
+                          {issue.title}
+                        </div>
+                        <div className="text-short mt-4 text-light-dark">
+                          {issue.user?.login}
+                        </div>
+                      </div>
+                      <img
+                        src={ArrowIcon}
+                        alt=":"
+                        className="w-4 h-4 invert -rotate-90"
+                      />
+                    </a>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
