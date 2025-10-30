@@ -12,14 +12,14 @@ O Projeto foi estruturado num escopo similar ao que habitualmente desenvolvo, co
 
 #### Futuras possibilidades
 
-Criação de teste com Vitest
-Ferramentas de observabilidade, NewRelic e Clarity
-Ferramentas de analise e tagueamento
-Ajuste no sistema de componentes, abstraindo um pouco mais certos componentes.
+- Criação de teste com Vitest
+- Ferramentas de observabilidade, NewRelic e Clarity
+- Ferramentas de analise e tagueamento
+- Ajuste no sistema de componentes, abstraindo um pouco mais certos componentes.
 
 #### O que há por fazer
 
-Não consegui pude me dedicar com mais horas, por coisas pessoais(eventos, atividades de casa, esportes, curso).
+Não pude me dedicar com mais horas, por algumas situações pessoais(eventos, atividades de casa, esportes, curso).
 Não consegui finalizar o filtro mobile(modal) e o comportamento completo do desktop, mantendo apenas o funcionamento sem problemas do filtro de tipo e linguagens.
 
 ## Tecnologias Utilizadas
