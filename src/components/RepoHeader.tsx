@@ -19,7 +19,7 @@ export const RepoHeader = ({ counts }: RepoHeaderProps) => {
 
   return (
     <>
-      <div className="border-none mb-8 md:px-4">
+      <div className="border-none mb-8 md:px-8">
         <nav className="flex gap-3 sm:gap-8 justify-between sm:justify-start">
           <button
             onClick={() => setActiveTab("repos")}
