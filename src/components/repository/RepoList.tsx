@@ -1,7 +1,9 @@
  
-import StarFilledIcon from "../assets/StarFilled.svg";
-import CommitIcon from "../assets/Commit.svg";
-import type { GithubRepo } from "../types/github";
+import StarFilledIcon from "../../assets/StarFilled.svg";
+import CommitIcon from "../../assets/Commit.svg";
+import type { GithubRepo } from "../../types/github";
+import { RepoListSkeleton } from "../utils/Skeleton";
+import { ErrorMessage, EmptyState } from "../utils/ErrorMessage";
 
 type Props = {
   loading: boolean;
@@ -13,19 +15,20 @@ type Props = {
 
 export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: Props) => {
   if (loading) {
-    return <p className="text-short text-light-dark">Aguarde...</p>;
+    return <RepoListSkeleton count={5} />;
   }
 
   if (error) {
     return (
-      <p className="text-short text-light-dark">Erro ao listar os repositorios.</p>
+      <ErrorMessage
+        title="Erro ao carregar repositórios"
+        message="Não foi possível carregar os repositórios. Verifique sua conexão e tente novamente."
+      />
     );
   }
 
   if (!Array.isArray(filtered) || filtered.length === 0) {
-    return (
-      <p className="text-short text-light-dark">Não foram encontrados repositorios.</p>
-    );
+    return <EmptyState message="Nenhum repositório encontrado com os filtros aplicados." />;
   }
 
   return (

@@ -1,9 +1,9 @@
 import { useState, useMemo, useEffect } from "react";
-import SearchIcon from "../assets/Search.svg";
-import SearchBlueIcon from "../assets/SearchBlue.svg";
-import { useGithubStore } from "../store/useGithubStore";
-import type { GithubRepo } from "../types/github";
-import { FilterDropdown } from "./FilterDropdown";
+import SearchIcon from "../../assets/Search.svg";
+import SearchBlueIcon from "../../assets/SearchBlue.svg";
+import { useGithubStore } from "../../store/useGithubStore";
+import type { GithubRepo } from "../../types/github";
+import { FilterDropdown } from "../utils/FilterDropdown";
 type RepoFiltersProps = {
   data: GithubRepo[];
   onFilterChange: (filters: {

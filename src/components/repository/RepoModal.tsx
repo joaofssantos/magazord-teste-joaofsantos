@@ -1,6 +1,6 @@
-import { useRepoIssues, useUser } from "../hooks/useGithubApi";
-import ArrowIcon from "../assets/Arrow.svg";
-import { GithubRepo } from "../types/github";
+import { useRepoIssues, useUser } from "../../hooks/useGithubApi";
+import ArrowIcon from "../../assets/Arrow.svg";
+import { GithubRepo } from "../../types/github";
 
 type Props = {
   repo: GithubRepo | null;

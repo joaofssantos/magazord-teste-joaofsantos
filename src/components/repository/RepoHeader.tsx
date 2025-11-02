@@ -1,9 +1,9 @@
 
-import { useGithubStore } from "../store/useGithubStore";
-import BookIcon from "../assets/Book.svg";
-import BookInactiveIcon from "../assets/BookInactive.svg";
-import StarIcon from "../assets/Star.svg";
-import StarInactiveIcon from "../assets/StarInactive.svg";
+import { useGithubStore } from "../../store/useGithubStore";
+import BookIcon from "../../assets/Book.svg";
+import BookInactiveIcon from "../../assets/BookInactive.svg";
+import StarIcon from "../../assets/Star.svg";
+import StarInactiveIcon from "../../assets/StarInactive.svg";
 
 type RepoHeaderProps = {
   counts: {

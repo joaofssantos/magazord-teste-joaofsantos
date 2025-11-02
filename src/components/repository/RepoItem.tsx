@@ -1,7 +1,7 @@
 import React from "react";
-import CommitIcon from "../assets/Commit.svg";
-import StarFilledIcon from "../assets/StarFilled.svg";
-import type { GithubRepo } from "../types/github";
+import CommitIcon from "../../assets/Commit.svg";
+import StarFilledIcon from "../../assets/StarFilled.svg";
+import type { GithubRepo } from "../../types/github";
 
 type Props = {
   repo: GithubRepo;

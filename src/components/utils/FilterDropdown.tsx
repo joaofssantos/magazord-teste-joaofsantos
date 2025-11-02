@@ -1,4 +1,4 @@
-import ArrowIcon from "../assets/Arrow.svg";
+import ArrowIcon from "../../assets/Arrow.svg";
 
 type FilterDropdownProps = {
   label: string;
@@ -41,7 +41,7 @@ export const FilterDropdown = ({
             className={`
               ${isMobile
                  ? "fixed inset-0 z-20 bg-white p-6"
-                 : "absolute top-  left-0 md:right-0 mt-2 border-none rounded-lg py-2 px-2 min-w-[200px] z-20 bg-white sm:bg-blue-light"
+                 : "absolute left-0 md:right-0 md:left-auto mt-2 border-none rounded-lg py-2 px-2 min-w-[200px] z-20 bg-white sm:bg-blue-light"
                }
             `}
           >

@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { ProfileSection } from './ProfileSection'
-import { RepoPanel } from './RepoPanel'
-import { useUser } from '../hooks/useGithubApi'
-import { useGithubStore } from '../store/useGithubStore'
+import { RepoPanel } from '../RepoPanel'
+import { useUser } from '../../hooks/useGithubApi'
+import { useGithubStore } from '../../store/useGithubStore'
+import { ProfileSkeleton } from '../utils/Skeleton'
 
 export const ProfilePage = ({ username }: { username: string }) => {
 
@@ -15,7 +16,23 @@ export const ProfilePage = ({ username }: { username: string }) => {
     return () => clearUsername()
   }, [username, setUsername, clearUsername, reset])
 
-  if (userQuery.isLoading) return <div className="p-6">Carregando o perfil</div>
+  if (userQuery.isLoading) {
+    return (
+      <div className="min-h-screen bg-white">
+        <div className="max-w-[1280px] mx-auto px-4 py-6">
+          <div className="grid sm:grid-cols-12 grid-rows-1 grid-cols-1 gap-8">
+            <div className="lg:col-span-4 xl:col-span-3 sm:col-span-4 row-auto">
+              <ProfileSkeleton />
+            </div>
+            <div className="lg:col-span-8 xl:col-span-9 sm:col-span-8 row-auto">
+              <div className="p-6 text-center text-light-dark">Carregando repositórios...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  
   if (userQuery.isError) {
     const error = userQuery.error as { response?: { status?: number } }
     const status = error?.response?.status
