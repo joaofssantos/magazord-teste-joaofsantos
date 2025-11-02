@@ -49,18 +49,18 @@ export const RepoModal = ({ repo, isOpen, onClose }: Props) => {
               href={userQuery.data.html_url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex hover:no-underline items-center gap-3 mb-5 hover:opacity-90 transition"
+              className="flex hover:no-underline items-baseline md:items-center gap-8 md:gap-3 mb-5 hover:opacity-90 transition md:flex-row flex-col "
             >
-              <div className="bg-slate-200 rounded-full lg:w-[128px] lg:h-[128px] :w-[96px] h-[96px]">
+              <div className="bg-slate-200 rounded-full lg:w-[128px] lg:h-[128px] md:w-[96px] md:h-[96px] w-[6rem] h-[6rem]">
                 <img
                   src={userQuery.data.avatar_url}
                   alt={userQuery.data.login}
-                  className="lg:w-[128px] lg:h-[128px] :w-[96px] h-[96px] border-none rounded-full "
+                  className="lg:w-[128px] lg:h-[128px] md:w-[96px] md:h-[96px] w-[6rem] h-[6rem] border-none rounded-full "
                 />
               </div>
-              <div className="flex flex-col ml-8 min-h-20">
-                <h2 className="lg:text-large  text-base  font-bold mb-2">
-                  {repo.owner?.login} / {repo.name}
+              <div className="flex flex-col ml-0 md:ml-8 min-h-6 md:min-h-20 ">
+                <h2 className="lg:text-large text-base  font-bold mb-2">
+                  {repo.owner?.login}  / {repo.name}
                 </h2>
                 <p className="lg:text-highlight text-base text-light-dark">
                   {repo.description}

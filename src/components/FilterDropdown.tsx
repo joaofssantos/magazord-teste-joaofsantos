@@ -23,7 +23,8 @@ export const FilterDropdown = ({
     <div className="relative">
       <button
         onClick={onToggle}
-        className="pl-4 pr-6 py-1 text-highlight font-light bg-gradient text-white rounded-full"
+        className="md:pl-4 pl-2 pr-4 md:pr-6  text-short md:text-highlight font-light 
+                    bg-gradient text-white rounded-full"
       >
         <img src={ArrowIcon} alt="Arrow" className="inline w-4 h-4 mr-2 mb-1" />
         {label}

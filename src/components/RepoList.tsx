@@ -33,9 +33,9 @@ export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: P
       {filtered.map((repo, i: number) => (
         <div
           key={repo.id || i}
-          className="py-6  md:pl-8 border-none md:hover:shadow-[0_0_16px_0_#4F4F5026] sm:border-none last:border-0"
           onClick={() => onItemClick && onItemClick(repo)}
           role={onItemClick ? "button" : undefined}
+          className="py-6  md:pl-8 md:hover:shadow-[0_0_16px_0_#4F4F5026] sm:border-none border-b-[1px] border-light last:border-0"
         >
           <h3 className="text-base font-bold">
             <a

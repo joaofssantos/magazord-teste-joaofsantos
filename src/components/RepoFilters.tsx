@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import SearchIcon from "../assets/Search.svg";
+import SearchBlueIcon from "../assets/SearchBlue.svg";
 import { useGithubStore } from "../store/useGithubStore";
 import type { GithubRepo } from "../types/github";
 import { FilterDropdown } from "./FilterDropdown";
@@ -14,6 +15,7 @@ type RepoFiltersProps = {
 export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
   const { searchQuery, setSearchQuery } = useGithubStore();
   const [isMobile, setIsMobile] = useState(false);
+  const [searchMobile, setSearchMobile] = useState(false);
   const [showTypeFilter, setShowTypeFilter] = useState(false);
   const [showLanguageFilter, setShowLanguageFilter] = useState(false);
   const [selectedTypes, setSelectedTypes] = useState<string[]>([]);
@@ -50,6 +52,10 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
     }
   };
 
+  const toggleSearchVisibility = () => {
+    setSearchMobile((prev) => !prev);
+  };
+
   const handleTypeChange = (type: string) => {
     setSelectedTypes((prev) =>
       prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
@@ -78,17 +84,35 @@ export const RepoFilters = ({ data, onFilterChange }: RepoFiltersProps) => {
   }, [selectedTypes, selectedLanguages, onFilterChange]);
 
   return (
-    <div className="mb-6 md:pl-8 flex justify-between items-baseline xl:items-center  lg:flex-row flex-col-reverse">
-      <div className="lg:max-w-[350px] xl:max-w-[450px] max-w-[unset] w-full border-b border-light flex items-center">
-        <img src={SearchIcon} alt="Search" />
+    <div className="relative mb-6 md:pl-8 flex justify-between items-baseline xl:items-center  lg:flex-row flex-col-reverse">
+      <div
+        className={`${isMobile ? "absolute bg-light  h-14 ml-2" : "" } ${searchMobile ? "z-20" : ""}  lg:max-w-[350px] xl:max-w-[450px] max-w-[unset] w-full border-b border-light flex items-center`}
+      >
+        <img src={isMobile ? SearchBlueIcon : SearchIcon} alt="Search" onClick={() => isMobile ? toggleSearchVisibility() : null} />
         <input
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search here"
-          className="flex-1 px-3 py-2 border-none focus:border-none text-base"
+          className={`${isMobile ? "bg-light" : ""} flex-1 px-3 py-2 border-none focus:border-none text-base`}
         />
       </div>
-      <div className=" gap-4 flex justify-end lg:mb-0 mb-4 lg:flex-direction-row">
+
+      {isMobile && (
+        <div className="w-full h-14 bg-light relative ">
+          <img
+            src={SearchBlueIcon}
+            onClick={toggleSearchVisibility}
+            className="absolute right-4 top-0 bottom-0 m-auto "
+            alt="Search Blue"
+          />
+        </div>
+      )}
+
+      <div
+        className=" gap-4 pl-2 flex justify-end lg:mb-0 mb-4 lg:flex-direction-row
+        md:relative absolute top-[12px] md:top-auto
+      "
+      >
         <FilterDropdown
           label="Type"
           isOpen={showTypeFilter}
