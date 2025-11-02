@@ -1,4 +1,3 @@
-
 import ArrowIcon from "../assets/Arrow.svg";
 
 type FilterDropdownProps = {
@@ -18,7 +17,7 @@ export const FilterDropdown = ({
   options,
   selectedOptions,
   onOptionChange,
-  isMobile = false
+  isMobile = false,
 }: FilterDropdownProps) => {
   return (
     <div className="relative">
@@ -29,28 +28,38 @@ export const FilterDropdown = ({
         <img src={ArrowIcon} alt="Arrow" className="inline w-4 h-4 mr-2 mb-1" />
         {label}
       </button>
-      
+
       {isOpen && (
         <>
           <div
             className="fixed inset-0 bg-[#00000066] z-10"
             onClick={onToggle}
           />
-          
-          <div className="absolute top-full left-0 2xl:left-0 md:right-0 md:left-auto  mt-2 border-none rounded-lg py-2 px-2 min-w-[200px] z-20 bg-white sm:bg-blue-light">
+
+          <div
+            className={`
+              ${isMobile
+                 ? "fixed inset-0 z-20 bg-white p-6"
+                 : "absolute top-  left-0 md:right-0 mt-2 border-none rounded-lg py-2 px-2 min-w-[200px] z-20 bg-white sm:bg-blue-light"
+               }
+            `}
+          >
             {isMobile && (
-              <div>
-                <h2>{label}</h2>
-                <button onClick={onToggle}></button>
+              <div className="flex justify-between items-center mb-4 border-none pb-3">
+                <h2 className="text-xl font-semibold">{label}</h2>
+                <button onClick={onToggle} className="text-[2rem] font-normal text-error border-none">
+                  ×
+                </button>
               </div>
             )}
-            
+
             {options.map((option) => (
               <label
                 key={option}
-                className={`flex items-center gap-2 pl-2 py-3 text-base sm:hover:bg-[#E6F1FB] cursor-pointer ${
-                  selectedOptions.includes(option) ? "bg-[#ebf2fe] text-secondary" : ""
-                }`}
+                className={`flex items-center gap-2 pl-2 py-3 text-base sm:hover:bg-[#E6F1FB] cursor-pointer ${selectedOptions.includes(option)
+                    ? "bg-[#ebf2fe] text-secondary"
+                    : ""
+                  }`}
               >
                 <input
                   type="checkbox"
