@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  # Development environment with hot reload
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - VITE_GITHUB_TOKEN=${VITE_GITHUB_TOKEN}
+    stdin_open: true
+    tty: true
+
+  # Production build with nginx
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - VITE_GITHUB_TOKEN=${VITE_GITHUB_TOKEN}

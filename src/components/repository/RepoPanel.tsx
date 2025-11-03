@@ -1,13 +1,13 @@
 import { useMemo } from "react";
-import { useRepos, useStarred } from "../hooks/useGithubApi";
-import { useGithubStore } from "../store/useGithubStore";
-import { useRepoFilters } from "../hooks/useRepoFilters";
-import { useRepoModal } from "../hooks/useRepoModal";
+import { useRepos, useStarred } from "../../hooks/useGithubApi";
+import { useGithubStore } from "../../store/useGithubStore";
+import { useRepoFilters } from "../../hooks/useRepoFilters";
+import { useRepoModal } from "../../hooks/useRepoModal";
 
-import { RepoList } from "./repository/RepoList";
-import { RepoModal } from "./repository/RepoModal";
-import { RepoHeader } from "./repository/RepoHeader";
-import { RepoFilters } from "./repository/RepoFilters";
+import { RepoList } from "./RepoList";
+import { RepoModal } from "./RepoModal";
+import { RepoHeader } from "./RepoHeader";
+import { RepoFilters } from "./RepoFilters";
 
 type Props = {
   username: string;
