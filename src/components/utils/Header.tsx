@@ -1,5 +1,5 @@
 
-import GithubLogo from "../assets/Github.svg"
+import GithubLogo from "../../assets/Github.svg"
 
 type HeaderProps = {
   onLogoClick?: () => void

@@ -1,7 +1,9 @@
  
-import StarFilledIcon from "../assets/StarFilled.svg";
-import CommitIcon from "../assets/Commit.svg";
-import type { GithubRepo } from "../types/github";
+import StarFilledIcon from "../../assets/StarFilled.svg";
+import CommitIcon from "../../assets/Commit.svg";
+import type { GithubRepo } from "../../types/github";
+import { RepoListSkeleton } from "../utils/Skeleton";
+import { ErrorMessage, EmptyState } from "../utils/ErrorMessage";
 
 type Props = {
   loading: boolean;
@@ -13,19 +15,20 @@ type Props = {
 
 export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: Props) => {
   if (loading) {
-    return <p className="text-short text-light-dark">Aguarde...</p>;
+    return <RepoListSkeleton count={5} />;
   }
 
   if (error) {
     return (
-      <p className="text-short text-light-dark">Erro ao listar os repositorios.</p>
+      <ErrorMessage
+        title="Erro ao carregar repositórios"
+        message="Não foi possível carregar os repositórios. Verifique sua conexão e tente novamente."
+      />
     );
   }
 
   if (!Array.isArray(filtered) || filtered.length === 0) {
-    return (
-      <p className="text-short text-light-dark">Não foram encontrados repositorios.</p>
-    );
+    return <EmptyState message="Nenhum repositório encontrado com os filtros aplicados." />;
   }
 
   return (
@@ -33,9 +36,9 @@ export const RepoList = ({ loading, error, filtered, activeTab, onItemClick }: P
       {filtered.map((repo, i: number) => (
         <div
           key={repo.id || i}
-          className="py-4  md:px-4 border-b border-light sm:border-none last:border-0 hover:bg-light"
           onClick={() => onItemClick && onItemClick(repo)}
           role={onItemClick ? "button" : undefined}
+          className="py-6  md:pl-8 md:hover:shadow-[0_0_16px_0_#4F4F5026] sm:border-none border-b-[1px] border-light last:border-0"
         >
           <h3 className="text-base font-bold">
             <a

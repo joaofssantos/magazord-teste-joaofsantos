@@ -35,6 +35,8 @@
     @apply text-dark no-underline hover:underline;
   }
 
+ 
+
   button {
     @apply  border px-3 py-1 text-highlight font-medium 
            transition-colors duration-150 focus:outline-none  ;

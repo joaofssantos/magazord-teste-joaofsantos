@@ -1,9 +1,9 @@
 import { useState } from "react";
-import EnterpriseIcon from "../assets/Enterprise.svg";
-import PinIcon from "../assets/Pin.svg";
-import ChainIcon from "../assets/Chain.svg";
-import SocialIcon from "../assets/Social.svg";
-import ArrowBlueIcon from "../assets/ArrowBlue.svg";
+import EnterpriseIcon from "../../assets/Enterprise.svg";
+import PinIcon from "../../assets/Pin.svg";
+import ChainIcon from "../../assets/Chain.svg";
+import SocialIcon from "../../assets/Social.svg";
+import ArrowBlueIcon from "../../assets/ArrowBlue.svg";
 type User = {
   avatar_url?: string;
   name?: string;
