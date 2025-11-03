@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { ProfileSection } from './ProfileSection'
-import { RepoPanel } from '../RepoPanel'
+import { RepoPanel } from '../repository/RepoPanel'
 import { useUser } from '../../hooks/useGithubApi'
 import { useGithubStore } from '../../store/useGithubStore'
 import { ProfileSkeleton } from '../utils/Skeleton'
@@ -15,6 +15,16 @@ export const ProfilePage = ({ username }: { username: string }) => {
     reset()
     return () => clearUsername()
   }, [username, setUsername, clearUsername, reset])
+
+  useEffect(() => {
+    if (userQuery.isSuccess && userQuery.data) {
+      const name = userQuery.data.name || userQuery.data.login || username
+      document.title = `${name} - GitHub Profile`
+    } 
+    return () => {
+      document.title = 'GitHub Profile Viewer'
+    }
+  }, [userQuery.isSuccess, userQuery.isLoading, userQuery.isError, userQuery.data, username])
 
   if (userQuery.isLoading) {
     return (
