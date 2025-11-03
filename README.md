@@ -10,6 +10,8 @@ Figma: https://www.figma.com/file/sf1CmqcEZbUzkeZOA4AUGj/TESTE-FRONT-MAGAZORD?no
 
 O Projeto foi estruturado num escopo similar ao que habitualmente desenvolvo, exceto que não utilizo tailwind, Vite, Zustand ou alguma biblioteca de componentes(MuI, Shadcn).
 
+Foi implantado o NewRelic como ferramenta de observabilidade
+
 #### Futuras possibilidades
 
 - Criação de teste com Vitest
@@ -308,6 +310,8 @@ Fluxo de publicação:
 - Pull Requests criam novas Preview Deployments com URL única para teste/review
 - Caso seja alterada a variável de ambiente, Realize um "Redeploy" de Produção para aplicar
 
+**Roteamento SPA (fix 404 em refresh):**
+O arquivo `vercel.json` na raiz do projeto configura rewrites para que todas as rotas sejam tratadas pelo `index.html`, evitando erro 404 ao recarregar páginas como `/username`.
 
 ### Deploy local com Docker
 
