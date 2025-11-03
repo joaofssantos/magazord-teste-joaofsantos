@@ -17,11 +17,13 @@ export const App = () => {
     const newPath = `/${encodeURIComponent(path)}`
     window.history.pushState({}, '', newPath)
     setCurrentPath(path)
+    setInput('')
   }
 
   const goHome = () => {
     window.history.pushState({}, '', '/')
     setCurrentPath('')
+    setInput('')
   }
 
   const currentUsername = currentPath || username
